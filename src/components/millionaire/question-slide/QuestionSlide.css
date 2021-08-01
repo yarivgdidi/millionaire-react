@@ -14,3 +14,18 @@
   align-items: center;
   justify-content: center;
 }
+.answer-card.mouse-down {
+
+}
+
+.answer-card.clicked {
+  color: crimson;
+  border: 2px solid crimson;
+}
+.answer-card.clicked.correct {
+  color: green;
+  border: 2px solid green;
+}
+.answer-card.answered.correct:not(.clicked) {
+   border: 2px dashed green;
+}

@@ -7,6 +7,7 @@ import './QuestionSlide.css'
 function QuestionSlide (props) {
   const { questionObj } = props;
   const [ questionObjDecoded, setQuestionObjDecoded ] = useState({ answers: [] })
+  const [ answered, setAnswered ] = useState(false)
 
   const fromBinary = encoded => {
     // returning just atob(encoded) is not UTF-8 safe;
@@ -29,6 +30,29 @@ function QuestionSlide (props) {
     });
   }, [props.questionObj]);
 
+  const handleCardClick = (answer, index) => {
+    if (answered)
+      return;
+    const answers = [ ...questionObjDecoded.answers ];
+    answers[index].clicked = true;
+    setQuestionObjDecoded({...questionObjDecoded, answers })
+    setAnswered(true);
+  }
+  const handleCardMouseDown = (answer, index) => {
+    if (answered)
+      return;
+    const answers = [ ...questionObjDecoded.answers ];
+    answers[index].mouseDown = true;
+    setQuestionObjDecoded({...questionObjDecoded, answers })
+  }
+  const handleCardMouseUp = (answer, index) => {
+    if (answered)
+      return;
+    const answers = [ ...questionObjDecoded.answers ];
+    answers[index].mouseDown = false;
+    setQuestionObjDecoded({...questionObjDecoded, answers })
+  }
+
   const { category = '', question = '', answers = [] } = questionObjDecoded;
   return (
 
@@ -41,19 +65,27 @@ function QuestionSlide (props) {
       </Typography>
       <Grid container className='answers' spacing={2}>
 
-        {answers.map(answer=>
-          <Grid item xs={12} sm={6}>
-            <Card className={'answer-card'}>
-              <Typography className="question" variant="h5">
-                {answer.answer}
-              </Typography>
-            </Card>
-          </Grid>
-            )}
+        {
+          answers.map((answer, index ) => {
+           const clicked = answer.clicked ? ' clicked' : ''
+           const correct = answer.correct ? ' correct' : ''
+           const isAnswered = answered ? ' answered' : ''
+           return (<Grid item xs={12} sm={6}>
+              <Card
+                raised={!answer.mouseDown}
+                onClick={() => handleCardClick(answer, index)}
+                onMouseDown={()=> handleCardMouseDown(answer, index)}
+                onMouseUp={()=> handleCardMouseUp(answer, index)}
+                className={'answer-card' + clicked + correct + isAnswered}>
+                <Typography className="question" variant="h5">
+                  {answer.answer}
+                </Typography>
+              </Card>
+            </Grid>
+          )})
+        }
+
       </Grid>
-
-
-      <p className="legend">Legend 1</p>
     </Grid>
 
   );
