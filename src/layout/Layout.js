@@ -23,8 +23,8 @@ function Layout() {
                 <Tab label="About" value="/about" component={Link} to={allTabs[1]} />
               </Tabs>
               <SwipeableRoutes>
-                <Route path={allTabs[0]} render={() => <Home/>} />
-                <Route path={allTabs[1]} render={() => <About/>} />
+                <Route key={'home'} path={allTabs[0]} render={() => <Home/>} />
+                <Route key={'about'} path={allTabs[1]} render={() => <About/>} />
               </SwipeableRoutes>
             </Fragment>
           )}

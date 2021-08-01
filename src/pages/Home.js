@@ -1,4 +1,5 @@
+import Millionaire from "../components/millionaire/Millionaire";
 function Home() {
-  return <h2>Home</h2>;
+  return <Millionaire />
 }
 export default Home;
