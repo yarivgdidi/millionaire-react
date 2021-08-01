@@ -19,12 +19,12 @@ function Layout() {
           render={({ location }) => (
             <Fragment>
               <Tabs  centered value={location.pathname} indicatorColor="primary" textColor="primary">
-                <Tab label="Home" value="/" component={Link} to={allTabs[0]} />
-                <Tab label="About" value="/about" component={Link} to={allTabs[1]} />
+                <Tab key={'home'} label="Home" value="/" component={Link} to={allTabs[0]} />
+                <Tab key={'about'} label="About" value="/about" component={Link} to={allTabs[1]} />
               </Tabs>
               <SwipeableRoutes>
-                <Route key={'home'} path={allTabs[0]} render={() => <Home/>} />
-                <Route key={'about'} path={allTabs[1]} render={() => <About/>} />
+                <Route key={'home'} path={allTabs[0]} render={() => <Home key={'home'}/>} />
+                <Route key={'about'} path={allTabs[1]} render={() => <About key={'about'}/>} />
               </SwipeableRoutes>
             </Fragment>
           )}

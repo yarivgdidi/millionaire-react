@@ -5,7 +5,7 @@ import './QuestionSlide.css'
 
 
 function QuestionSlide (props) {
-  const { questionObj } = props;
+  const { questionObj, onStatusChanged, index:slideIndex } = props;
   const [ questionObjDecoded, setQuestionObjDecoded ] = useState({ answers: [] })
   const [ answered, setAnswered ] = useState(false)
 
@@ -36,6 +36,7 @@ function QuestionSlide (props) {
     const answers = [ ...questionObjDecoded.answers ];
     answers[index].clicked = true;
     setQuestionObjDecoded({...questionObjDecoded, answers })
+    onStatusChanged({answered: true, correct: answer.correct}, slideIndex)
     setAnswered(true);
   }
   const handleCardMouseDown = (answer, index) => {
@@ -67,10 +68,11 @@ function QuestionSlide (props) {
 
         {
           answers.map((answer, index ) => {
+
            const clicked = answer.clicked ? ' clicked' : ''
            const correct = answer.correct ? ' correct' : ''
            const isAnswered = answered ? ' answered' : ''
-           return (<Grid item xs={12} sm={6}>
+           return (<Grid item xs={12} sm={6}  key={index}>
               <Card
                 raised={!answer.mouseDown}
                 onClick={() => handleCardClick(answer, index)}
