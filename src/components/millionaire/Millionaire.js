@@ -11,7 +11,7 @@ function Millionaire() {
     {"category":"RW50ZXJ0YWlubWVudDogRmlsbQ==","type":"bXVsdGlwbGU=","difficulty":"ZWFzeQ==","question":"V2hvIGluIFB1bHAgRmljdGlvbiBzYXlzICJObywgdGhleSBnb3QgdGhlIG1ldHJpYyBzeXN0ZW0gdGhlcmUsIHRoZXkgd291bGRuJ3Qga25vdyB3aGF0IHRoZSBmdWNrIGEgUXVhcnRlciBQb3VuZGVyIGlzLiI=","correct_answer":"VmluY2VudCBWZWdh","incorrect_answers":["SnVsZXMgV2lubmZpZWxk","SmltbWllIERpbW1pY2s=","QnV0Y2ggQ29vbGlkZ2U="]}
   ];
 
-  const questionSlides = questionsObjects.map(questionObj => (<div className={'slide'}>
+  const questionSlides = questionsObjects.map(questionObj => (<div className={'question-slide'}>
     <QuestionSlide questionObj={ questionObj }/>
   </div>))
 

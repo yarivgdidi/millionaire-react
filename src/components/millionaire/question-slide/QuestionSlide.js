@@ -1,9 +1,12 @@
-import {Card} from "@material-ui/core";
+import {Card, Typography, Grid  } from "@material-ui/core";
 import {useState, useEffect} from "react";
 import { shuffle } from 'lodash';
+import './QuestionSlide.css'
+
+
 function QuestionSlide (props) {
   const { questionObj } = props;
-  const { questionObjDecoded, setQuestionObjDecoded } = useState({ answers: [] })
+  const [ questionObjDecoded, setQuestionObjDecoded ] = useState({ answers: [] })
 
   const fromBinary = encoded => {
     // returning just atob(encoded) is not UTF-8 safe;
@@ -26,17 +29,32 @@ function QuestionSlide (props) {
     });
   }, [props.questionObj]);
 
-
-
+  const { category = '', question = '', answers = [] } = questionObjDecoded;
   return (
 
-    <div>
-      <Card className={'main-card'}>
-        Category: {}
-      </Card>
+    <Grid  className={'main-question-container'}>
+      <Typography className="category" variant="h6">
+        {category}
+      </Typography>
+      <Typography className="question" variant="h4">
+        {question}
+      </Typography>
+      <Grid container className='answers' spacing={2}>
+
+        {answers.map(answer=>
+          <Grid item xs={12} sm={6}>
+            <Card className={'answer-card'}>
+              <Typography className="question" variant="h5">
+                {answer.answer}
+              </Typography>
+            </Card>
+          </Grid>
+            )}
+      </Grid>
+
 
       <p className="legend">Legend 1</p>
-    </div>
+    </Grid>
 
   );
 }
